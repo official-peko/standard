@@ -1014,7 +1014,7 @@ platform android {
         for exit_function in exit_functions {
             exit_function();
         }
-        extern::end_gc();
+        extern::stop_gc();
     }
 
     [external] fn main(argc: int, argv: string[]) => int {
@@ -1032,6 +1032,7 @@ platform windows|linux|macos|ios {
     [external] fn main(argc: int, argv: string[]) => int {
         // start the gc
         extern::start_gc(&argc);
+        
         __create_globals();
         
         // on windows gui apps, hide the console window
@@ -1053,7 +1054,7 @@ platform windows|linux|macos|ios {
         for exit_function in exit_functions {
             exit_function();
         }
-        extern::end_gc();
+        extern::stop_gc();
         
         return 0;
     }
